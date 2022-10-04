@@ -1,4 +1,5 @@
 import pandas as pd
+
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
 
@@ -8,6 +9,7 @@ import sklearn
 import joblib
 from sqlalchemy import create_engine
 import os
+
 
 app = Flask(__name__)
 

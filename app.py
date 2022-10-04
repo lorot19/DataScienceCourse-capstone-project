@@ -83,7 +83,7 @@ def main():
 
 
 
-    app.run(host='0.0.0.0', port=3001, debug=True)
+    app.run(host='0.0.0.0', debug=False)
 
 
 if __name__ == '__app__':

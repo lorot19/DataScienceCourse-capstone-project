@@ -7,7 +7,7 @@ from flask import render_template, request
 import sklearn
 import joblib
 from sqlalchemy import create_engine
-
+import os
 
 app = Flask(__name__)
 
@@ -69,7 +69,8 @@ def main():
     Main function
     :return:
     """
-    app.run(host='0.0.0.0', port=3001, debug=False)
+    port = int(os.environ.get("PORT", 3001))
+    app.run(host='0.0.0.0', port=port, debug=False)
 
 
 if __name__ == '__main__':

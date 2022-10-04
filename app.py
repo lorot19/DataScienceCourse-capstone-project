@@ -1,13 +1,14 @@
 import pandas as pd
-
+import nltk
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
 
 from flask import Flask
 from flask import render_template, request
-
+import pickle
 import joblib
 from sqlalchemy import create_engine
+import sklearn
 
 
 app = Flask(__name__)
@@ -28,13 +29,13 @@ def tokenize(text):
 
     return clean_tokens
 
+
 # load data
-engine = create_engine('sqlite:///moviesdata.db')
-df = pd.read_sql_table('name', con=engine)
+engine = None
+df = None
 
 # load model
-model = joblib.load("netflix_model.pkl")
-
+model = None
 
 # index webpage displays cool visuals and receives user input text for model
 @app.route('/')
@@ -70,8 +71,20 @@ def main():
     Main function
     :return:
     """
+    # load data
+    global engine
+    engine = create_engine('sqlite:///moviesdata.db')
+    global df
+    df = pd.read_sql_table('name', con=engine)
+
+    # load model
+    global model
+    model = pickle.load(open("netflix_model.pkl", "rb"))
+
+
+
     app.run(host='0.0.0.0', port=3001, debug=True)
 
 
-if __name__ == '__main__':
+if __name__ == '__app__':
     main()
